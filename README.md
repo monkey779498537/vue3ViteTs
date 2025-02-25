@@ -29,3 +29,11 @@ npm i
                 - npm 官方文档明确指出：应该将 package-lock.json 提交到版本控制
         - 不提交的情况
             - 仅开发库
+
+#### 安装核心依赖
+```js
+npm install vue-router@4 pinia axios
+npm install element-plus @element-plus/icons-vue
+npm install eslint prettier eslint-plugin-vue -D
+```
+- 项目的搭建核心 vue3 + vite + TS + vue-router + pinia + axios + ElementPlus

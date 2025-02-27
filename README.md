@@ -37,3 +37,46 @@ npm install element-plus @element-plus/icons-vue
 npm install eslint prettier eslint-plugin-vue -D
 ```
 - 项目的搭建核心 vue3 + vite + TS + vue-router + pinia + axios + ElementPlus
+
+#### 代码风格规范
+- ESLint + Prettier：代码风格检查
+    - @eslint/js
+        - 封装了 ESLint 内置的所有核心 JavaScript 规则
+    - vue-eslint-parser
+        - 将 Vue 单文件组件（.vue 文件）解析为抽象语法树（AST），使 ESLint 可以对整个 Vue 组件进行分析
+    - eslint-plugin-vue
+        - 提供针对 Vue 单文件组件（.vue）的代码`规范检查`
+    - eslint-plugin-prettier
+        - 结合 ESLint 和 Prettier 进行代码检查和格式化，确保代码风格的一致性
+    - @typescript-eslint/parser
+        - 用于 ESLint 的 TypeScript 解析器，ESLint 默认只能解析 JavaScript 代码
+    - @typescript-eslint/eslint-plugin
+        - 为 TypeScript 代码提供特定 ESLint 规则的插件
+    - globals
+        - 提供了一个预定义的全局变量列表，配置 ESLint 时，需要告知 ESLint 项目中使用的全局变量
+    ```js
+    npm install -D @eslint/js vue-eslint-parser eslint-plugin-vue eslint-plugin-prettier
+    npm install -D @typescript-eslint/parser @typescript-eslint/eslint-plugin
+    npm install -D globals
+    ```
+    - 配置文件
+        - 需要注意，如果安装的是eslint9+版本，不能使用.eslintrc.cjs进行配置，必须改成eslint.config.js，否则lint的时候报错
+            - 处理以上版本问题，要么降低版本保留原配置.eslintrc.cjs，要么迁移eslint.config.js
+    - ESLint 主要检测
+        - 未使用变量 unusedVar
+        - 箭头函数空格问题
+        - 代码缩进不一致
+        - 模板中双引号使用问题
+        - 语句缺少分号（根据 Prettier 配置）
+    - 需要新增文件和配置
+        - eslint.config.js 核心文件
+        - tsconfig.eslint.json
+        - .prettierrc
+        - .eslintignore
+        - package.json 新增lint配置
+        ```js
+        "lint": "eslint . --ext .vue,.js,.ts,.jsx,.tsx --fix",
+        "format": "prettier --write ."
+        ```
+
+

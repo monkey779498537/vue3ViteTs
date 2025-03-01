@@ -88,6 +88,42 @@ npm install eslint prettier eslint-plugin-vue -D
         }
         ```
         - 得到的反馈应该是这个文件的报错，并且会自动把缩紧格式化处理
+    
+- 开发阶段实时检查 TypeScript 错误
+    - 插件名称 vite-plugin-checker
+        在npm run dev的时候就直接检测TS型类进行报错，不用等到build的时候才报错
+    - 原因：
+        - Vite默认使用esbuild来转换TypeScript，但这只是在编译时进行转译，并不会进行类型检查。
+        - 默认情况下，Vite在开发服务器（dev）运行时，并不会执行TypeScript的类型检查
+        - build时可能会使用tsc来进行类型检查
+    ```js
+    // 安装插件
+    npm install vite-plugin-checker --save-dev
+
+    // vite.config.ts 配置插件
+    import checker from 'vite-plugin-checker'
+    
+    export default defineConfig({
+      plugins: [
+        ...
+        checker({
+          // 如果是配置 tsconfig.app.json 需要手动指定
+          // 显式启用 Vue 类型检查
+          vueTsc: {
+              tsconfigPath: "./tsconfig.app.json", // 显式指定配置
+          },
+        }),
+      ],
+    })
+
+    // tsconfig.app.json
+    {
+      "compilerOptions": {
+          "strict": true,
+      },
+      "include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.vue"]
+    }
+    ```
 
 - Husky(Git Hooks管理) + lint-staged(Git 仅检查暂存区文件)：Git 提交校验
 ```js

@@ -16,6 +16,7 @@ const count = ref(0)
   <h1>{{ msg }}</h1>
 
   <div class="card">
+    <el-button>el-element Plus</el-button>
     <button type="button" @click="count++">count is {{ count }}</button>
     <p>
       Edit

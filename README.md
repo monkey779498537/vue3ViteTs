@@ -153,3 +153,18 @@ export default defineConfig({
 ```js
 npm install --save-dev @types/node
 ```
+
+#### 挂载组件
+- `src/main.ts`: 安装好的组件需要挂载到vue实例上进行使用
+
+```js
+import { createApp } from 'vue'
+import './style.css'
+import App from './App.vue'
+import ElementPlus from 'element-plus'
+import 'element-plus/dist/index.css'
+
+createApp(App) // 创建vue实例
+    .use(ElementPlus)
+    .mount('#app') // 渲染到根节点
+```

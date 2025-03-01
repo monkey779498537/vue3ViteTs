@@ -128,3 +128,28 @@ src/
 └─ App.vue
 main.ts
 ```
+
+#### 配置路径别名：@
+- vue3已经支持路径别名，无需额外安装
+
+```js
+// 修改文件 vite.config
+import path from 'path' // 新增
+
+export default defineConfig({
+    ...
+    // 新增
+    resolve: {
+        alias: {
+            '@': path.resolve(__dirname, 'src')
+        }
+    }
+})
+```
+- 引入path模块时的type依赖，否则在编译打包时，TS检测识别不了path相关内容
+- 当你需要 import path from 'path' 时需要处理
+- 原因
+    - 通常是因为path是 Node.js 内置模块，而 Vite 默认运行在浏览器环境中，TypeScript 可能无法识别path模块的类型
+```js
+npm install --save-dev @types/node
+```

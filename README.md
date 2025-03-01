@@ -78,5 +78,38 @@ npm install eslint prettier eslint-plugin-vue -D
         "lint": "eslint . --ext .vue,.js,.ts,.jsx,.tsx --fix",
         "format": "prettier --write ."
         ```
+    - 测试配置效果
+        - 在src下的任意vue文件的script标签中插入以下代码，后再运行npm run lint
+        ```js
+        // 这里有多个需要 lint 的错误 eslint 检测测试代码
+        const unusedVar = 'test'  // 未使用的变量
+        const  testFunc = ()=>{  // 箭头函数空格问题
+        console.log('hello')      // 缩进问题
+        }
+        ```
+        - 得到的反馈应该是这个文件的报错，并且会自动把缩紧格式化处理
 
+- Husky(Git Hooks管理) + lint-staged(Git 仅检查暂存区文件)：Git 提交校验
+```js
+// 安装
+npm install husky lint-staged -D
 
+// 初始化 husky
+npx husky install // 会自动创建 .husky文件用来配置git钩子内容
+npm pkg set scripts.prepare="husky install"
+
+// package.json 新增
+{
+    "lint-staged": {
+        "*.{js,ts,vue}": [
+            "eslint --fix --max-warnings 0"
+        ]
+    }
+}
+
+// 在.husky 手动新增pre-commit文件
+npx lint-staged // 表示在git commit动作的时候进行操作 相当于 npm run lint:lint-staged
+
+// 测试
+git commit -m 'test husky' // 按照eslint规则报错
+```

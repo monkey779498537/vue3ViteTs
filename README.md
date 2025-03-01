@@ -113,3 +113,18 @@ npx lint-staged // 表示在git commit动作的时候进行操作 相当于 npm 
 // 测试
 git commit -m 'test husky' // 按照eslint规则报错
 ```
+
+#### 设计目录结构
+```js
+src/
+├─ api/          // 接口封装
+├─ assets/       // 静态资源
+├─ components/   // 公共组件
+├─ router/       // 路由配置
+├─ stores/       // Pinia store
+├─ views/        // 页面组件
+├─ utils/        // 工具函数
+├─ types/        // TS类型定义 如果是vue3 并使用TS时
+└─ App.vue
+main.ts
+```

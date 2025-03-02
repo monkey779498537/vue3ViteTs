@@ -293,5 +293,14 @@ VITE_API_BASE_URL = https://api.example.com
 VITE_APP_TITLE = My App
 ```
 
+#### Axios封装
+- 创建 utils/request.ts 文件用于封装axios
+- 创建 types/request.ts 文件用于定义axios封装里面的type
 
-```
+#### 全局状态管理 Pinia
+
+#### 路由配置
+
+#### 封装API请求
+
+#### 业务代码

@@ -204,3 +204,39 @@ createApp(App) // 创建vue实例
     .use(ElementPlus)
     .mount('#app') // 渲染到根节点
 ```
+
+#### 配置代理
+- 使用网上的公开免费api做测试练手
+- 登录认证接口
+    - 推荐使用 Reqres.in（专门用于测试的伪服务端）：
+    - 登录接口：POST https://reqres.in/api/login
+    - 请求参数：{ "email": "eve.holt@reqres.in", "password": "cityslicka" }
+    - 返回 token：{ "token": "QpwL5tke4Pnpja7X4" }
+- 增删改查接口
+    - 推荐使用 JSONPlaceholder（经典伪 REST API）：
+    - 获取列表：GET https://jsonplaceholder.typicode.com/posts
+    - 新增数据：POST https://jsonplaceholder.typicode.com/posts
+    - 修改数据：PUT https://jsonplaceholder.typicode.com/posts/1
+    - 删除数据：DELETE https://jsonplaceholder.typicode.com/posts/1
+
+```js
+// 修改文件 vite.config
+import { defineConfig } from 'vite'
+
+export default defineConfig({
+    server: {
+        proxy: {
+            '/api': {
+                target: 'https://jsonplaceholder.typicode.com',
+                changeOrigin: true,
+                rewrite: path => path.replace(/^\/api/, '')
+            },
+            '/reqres': {
+                target: 'https://reqres.in/api',
+                changeOrigin: true,
+                rewrite: path => path.replace(/^\/reqres/, '')
+            }
+        }
+    }
+})
+```

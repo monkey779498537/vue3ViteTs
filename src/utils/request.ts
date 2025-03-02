@@ -6,7 +6,7 @@ import type {
   ResponseData,
   RequestConfig,
   RequestConfigWithLoading
-} from '../types/request'
+} from '@/types/request'
 
 class Request {
   private instance: AxiosInstance

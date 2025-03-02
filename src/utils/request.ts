@@ -96,7 +96,7 @@ class Request {
             default:
                 ElMessage({
                     message: `请求错误：${message}`,
-                    type: 'error',
+                    type: 'error'
                 })
             // 可以在这里触发全局错误提示
         }

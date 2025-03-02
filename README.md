@@ -6,9 +6,11 @@ npm create vite@latest .
 ```
 
 #### 初始化
+
 ```js
 npm i
 ```
+
 - 安装node_modules依赖
 - 自动生成 package-lock.json 文件
     - 区别
@@ -31,14 +33,17 @@ npm i
             - 仅开发库
 
 #### 安装核心依赖
+
 ```js
 npm install vue-router@4 pinia axios
 npm install element-plus @element-plus/icons-vue
 npm install eslint prettier eslint-plugin-vue -D
 ```
+
 - 项目的搭建核心 vue3 + vite + TS + vue-router + pinia + axios + ElementPlus
 
 #### 代码风格规范
+
 - ESLint + Prettier：代码风格检查
     - @eslint/js
         - 封装了 ESLint 内置的所有核心 JavaScript 规则
@@ -82,27 +87,29 @@ npm install eslint prettier eslint-plugin-vue -D
         - 在src下的任意vue文件的script标签中插入以下代码，后再运行npm run lint
         ```js
         // 这里有多个需要 lint 的错误 eslint 检测测试代码
-        const unusedVar = 'test'  // 未使用的变量
-        const  testFunc = ()=>{  // 箭头函数空格问题
-        console.log('hello')      // 缩进问题
+        const unusedVar = 'test' // 未使用的变量
+        const testFunc = () => {
+            // 箭头函数空格问题
+            console.log('hello') // 缩进问题
         }
         ```
         - 得到的反馈应该是这个文件的报错，并且会自动把缩紧格式化处理
-    
 - 开发阶段实时检查 TypeScript 错误
+
     - 插件名称 vite-plugin-checker
-        在npm run dev的时候就直接检测TS型类进行报错，不用等到build的时候才报错
+      在npm run dev的时候就直接检测TS型类进行报错，不用等到build的时候才报错
     - 原因：
         - Vite默认使用esbuild来转换TypeScript，但这只是在编译时进行转译，并不会进行类型检查。
         - 默认情况下，Vite在开发服务器（dev）运行时，并不会执行TypeScript的类型检查
         - build时可能会使用tsc来进行类型检查
+
     ```js
     // 安装插件
     npm install vite-plugin-checker --save-dev
 
     // vite.config.ts 配置插件
     import checker from 'vite-plugin-checker'
-    
+
     export default defineConfig({
       plugins: [
         ...
@@ -126,6 +133,7 @@ npm install eslint prettier eslint-plugin-vue -D
     ```
 
 - Husky(Git Hooks管理) + lint-staged(Git 仅检查暂存区文件)：Git 提交校验
+
 ```js
 // 安装
 npm install husky lint-staged -D
@@ -149,6 +157,7 @@ npx lint-staged // 表示在git commit动作的时候进行操作 相当于 npm 
 // 测试
 git commit -m 'test husky' // 按照eslint规则报错
 ```
+
 ```js
 // 实现 Git 提交时仅拦截错误（error）而放过警告（warning）
 // husky 创建自定义过滤脚本
@@ -175,6 +184,7 @@ try {
 ```
 
 #### 设计目录结构
+
 ```js
 src/
 ├─ api/          // 接口封装
@@ -190,6 +200,7 @@ main.ts
 ```
 
 #### 配置路径别名：@
+
 - vue3已经支持路径别名，无需额外安装
 
 ```js
@@ -206,17 +217,21 @@ export default defineConfig({
     }
 })
 ```
+
 - 引入path模块时的type依赖，否则在编译打包时，TS检测识别不了path相关内容
 - 当你需要 import path from 'path' 时需要处理
 - 原因
     - 通常是因为path是 Node.js 内置模块，而 Vite 默认运行在浏览器环境中，TypeScript 可能无法识别path模块的类型
+
 ```js
 npm install --save-dev @types/node
 ```
 
 - 额外注意：
+
 1. 配置了TS模块，需要对TS也做别名配置，vite.config.ts 不对TS生效
 2. 当有tsconfig.app.json 和 tsconfig.json文件时，需要设置到 tsconfig.app.json文件中
+
 ```js
 // tsconfig.app.json
 {
@@ -233,6 +248,7 @@ npm install --save-dev @types/node
 ```
 
 #### 挂载组件
+
 - `src/main.ts`: 安装好的组件需要挂载到vue实例上进行使用
 
 ```js
@@ -248,6 +264,7 @@ createApp(App) // 创建vue实例
 ```
 
 #### 配置代理
+
 - 使用网上的公开免费api做测试练手
 - 登录认证接口
     - 推荐使用 Reqres.in（专门用于测试的伪服务端）：
@@ -284,16 +301,18 @@ export default defineConfig({
 ```
 
 #### 环境量配置
+
 - 根目录下创建以下文件
-    - .env             # 所有情况下都会加载，通常用于存储默认值或者跨环境的共享变量，可选配置
-    - .env.local       # 所有情况下都会加载，但会被 git 忽略
+    - .env # 所有情况下都会加载，通常用于存储默认值或者跨环境的共享变量，可选配置
+    - .env.local # 所有情况下都会加载，但会被 git 忽略
     - .env.development # 开发环境
-    - .env.production  # 生产环境
+    - .env.production # 生产环境
 - 注意事项：
-    1. 只有以 VITE_ 开头的变量才会被暴露给客户端
+    1. 只有以 VITE\_ 开头的变量才会被暴露给客户端
     2. 敏感信息（如数据库密码）不应该放在前端环境变量中
     3. 环境变量在构建时会被替换，修改环境变量需要重新构建
     4. 可以使用 .env.local 文件来覆盖默认配置（该文件会被 git 忽略）
+
 ```js
 // .env 可选
 VITE_APP_NAME = MyAwesomeApp
@@ -312,10 +331,12 @@ VITE_APP_TITLE = My App
 ```
 
 #### Axios封装
+
 - 创建 utils/request.ts 文件用于封装axios
 - 创建 types/request.ts 文件用于定义axios封装里面的type
 
 #### 封装API请求
+
 - src/api/auth.ts
 - src/types/auth.ts 根据接口返回，定义TS接口类型
 - src/api/post.ts
@@ -323,10 +344,12 @@ VITE_APP_TITLE = My App
 - src/api/index.ts 统一暴露出去给业务方使用，以便统一管理
 
 #### 全局状态管理 Pinia
+
 - main.ts 挂载
 - 新增 src/stores/user.ts 作为全局状态管理用户登陆token信息
 
 #### 路由配置
+
 - main.ts 挂载
 - 设计功能点：
     1. `模块化`：一个入口文件index.ts，负责创建router实例，每个模块有自己的路由配置文件，然后在入口文件中合并。
@@ -340,6 +363,7 @@ VITE_APP_TITLE = My App
 - 模块化设计：
     - 新建 src/router 目录，统一处理路由相关内容
     - 设置路由 src/router/index.ts
+
 ```js
 // 目录
 // ./src/router
@@ -353,8 +377,10 @@ VITE_APP_TITLE = My App
 │   └── utils.ts          # 路由工具函数
 
 ```
+
 - 设置路由出口 src/App.vue
     - 路由过渡动画
+
 ```js
 <router-view v-slot="{ Component }">
   <transition name="fade" mode="out-in">
@@ -362,10 +388,12 @@ VITE_APP_TITLE = My App
   </transition>
 </router-view>
 ```
+
 - TypeScript 找不到 .vue 文件的类型声明 处理
     - 原因
         - 导入Vue单文件组件（.vue文件）时，需要告诉TypeScript如何处理这些文件，因为TypeScript默认不会识别.vue文件的类型
         - Vue项目通常使用shims-vue.d.ts文件来声明这些模块类型，确保TypeScript能够正确识别它们。
+
 ```js
 // src/shims-vue.d.ts
 declare module '*.vue' {

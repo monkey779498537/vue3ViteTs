@@ -1,48 +1,48 @@
 {
-  "name": "vue3vitets",
-  "private": true,
-  "version": "0.0.0",
-  "type": "module",
-  "scripts": {
-    "dev": "vite",
-    "build": "vue-tsc -b && vite build",
-    "preview": "vite preview",
-    "lint": "eslint . --ext .vue,.js,.ts,.jsx,.tsx --fix",
-    "format": "prettier --write .",
-    "prepare": "husky install"
-  },
-  "dependencies": {
-    "@element-plus/icons-vue": "^2.3.1",
-    "axios": "^1.7.9",
-    "element-plus": "^2.9.5",
-    "pinia": "^3.0.1",
-    "vue": "^3.5.13",
-    "vue-router": "^4.5.0"
-  },
-  "devDependencies": {
-    "@eslint/js": "^9.21.0",
-    "@types/node": "^22.13.8",
-    "@typescript-eslint/eslint-plugin": "^8.25.0",
-    "@typescript-eslint/parser": "^8.25.0",
-    "@vitejs/plugin-vue": "^5.2.1",
-    "@vue/tsconfig": "^0.7.0",
-    "eslint": "^9.21.0",
-    "eslint-config-prettier": "^10.0.2",
-    "eslint-plugin-prettier": "^5.2.3",
-    "eslint-plugin-vue": "^9.32.0",
-    "globals": "^16.0.0",
-    "husky": "^9.1.7",
-    "lint-staged": "^15.4.3",
-    "prettier": "^3.5.2",
-    "typescript": "~5.7.2",
-    "vite": "^6.2.0",
-    "vite-plugin-checker": "^0.9.0",
-    "vue-eslint-parser": "^9.4.3",
-    "vue-tsc": "^2.2.4"
-  },
-  "lint-staged": {
-    "*.{js,ts,vue}": [
-      "eslint --fix --max-warnings 0"
-    ]
-  }
+    "name": "vue3vitets",
+    "private": true,
+    "version": "0.0.0",
+    "type": "module",
+    "scripts": {
+        "dev": "vite",
+        "build": "vue-tsc -b && vite build",
+        "preview": "vite preview",
+        "lint": "eslint . --ext .vue,.js,.ts,.jsx,.tsx --fix",
+        "format": "prettier --write .",
+        "prepare": "husky install"
+    },
+    "dependencies": {
+        "@element-plus/icons-vue": "^2.3.1",
+        "axios": "^1.7.9",
+        "element-plus": "^2.9.5",
+        "pinia": "^3.0.1",
+        "vue": "^3.5.13",
+        "vue-router": "^4.5.0"
+    },
+    "devDependencies": {
+        "@eslint/js": "^9.21.0",
+        "@types/node": "^22.13.8",
+        "@typescript-eslint/eslint-plugin": "^8.25.0",
+        "@typescript-eslint/parser": "^8.25.0",
+        "@vitejs/plugin-vue": "^5.2.1",
+        "@vue/tsconfig": "^0.7.0",
+        "eslint": "^9.21.0",
+        "eslint-config-prettier": "^10.0.2",
+        "eslint-plugin-prettier": "^5.2.3",
+        "eslint-plugin-vue": "^9.32.0",
+        "globals": "^16.0.0",
+        "husky": "^9.1.7",
+        "lint-staged": "^15.4.3",
+        "prettier": "^3.5.2",
+        "typescript": "~5.7.2",
+        "vite": "^6.2.0",
+        "vite-plugin-checker": "^0.9.0",
+        "vue-eslint-parser": "^9.4.3",
+        "vue-tsc": "^2.2.4"
+    },
+    "lint-staged": {
+        "*.{js,ts,vue}": [
+            "eslint --fix --max-warnings 0"
+        ]
+    }
 }

@@ -327,5 +327,44 @@ VITE_APP_TITLE = My App
 - 新增 src/stores/user.ts 作为全局状态管理用户登陆token信息
 
 #### 路由配置
+- main.ts 挂载
+- 设计功能点：
+    1. `模块化`：一个入口文件index.ts，负责创建router实例，每个模块有自己的路由配置文件，然后在入口文件中合并。
+    2. `动态导入（路由懒加载）`：
+        - Vue3支持defineAsyncComponent，路由配置里可以直接用import()来实现代码分割，每个模块组件会被单独打包，减少初始加载时间
+        - import()实现组件懒加载
+- 路由守卫控制：
+    1. 登陆状态控制
+    2. 权限控制
+    3. 404页面的处理，需要放在路由配置的最后，作为通配符路由
+- 模块化设计：
+    - 新建 src/router 目录，统一处理路由相关内容
+    - 设置路由 src/router/index.ts
+```js
+// 目录
+// ./src/router
+├── router/
+│   ├── index.ts          # 路由主入口
+│   ├── modules/          # 业务模块路由
+│   │   ├── user.ts       # 用户模块路由
+│   │   ├── product.ts    # 商品模块路由
+│   │   └── ...           # 其他模块
+
+// ./src/utils/router.ts
+│   └── router.ts          # 路由工具函数
+
+// ./src/types/router.ts
+│   ├── router.ts          # 类型声明
+
+```
+- 设置路由出口 src/App.vue
+    - 路由过渡动画
+```js
+<router-view v-slot="{ Component }">
+  <transition name="fade" mode="out-in">
+    <component :is="Component" />
+  </transition>
+</router-view>
+```
 
 #### 业务代码

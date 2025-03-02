@@ -149,6 +149,30 @@ npx lint-staged // 表示在git commit动作的时候进行操作 相当于 npm 
 // 测试
 git commit -m 'test husky' // 按照eslint规则报错
 ```
+```js
+// 实现 Git 提交时仅拦截错误（error）而放过警告（warning）
+// husky 创建自定义过滤脚本
+touch .husky/allow-warnings.js
+
+// .husky/allow-warnings.js
+/* global process */
+import { execSync } from 'child_process'
+
+try {
+  // 执行 ESLint 检测但允许无限数量的警告
+  execSync('eslint --fix --max-warnings=1000000', { stdio: 'inherit' })
+} catch (e) {
+  // 当有 error 类型规则被触发时，才会退出并阻止提交
+  process.exit(e.status)
+}
+
+// 修改.husky/pre-commit
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+- npx lint-staged
++ node .husky/allow-warnings.js
+```
 
 #### 设计目录结构
 ```js

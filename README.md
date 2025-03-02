@@ -349,12 +349,8 @@ VITE_APP_TITLE = My App
 │   │   ├── user.ts       # 用户模块路由
 │   │   ├── product.ts    # 商品模块路由
 │   │   └── ...           # 其他模块
-
-// ./src/utils/router.ts
-│   └── router.ts          # 路由工具函数
-
-// ./src/types/router.ts
-│   ├── router.ts          # 类型声明
+│   ├── types.ts          # 类型声明
+│   └── utils.ts          # 路由工具函数
 
 ```
 - 设置路由出口 src/App.vue

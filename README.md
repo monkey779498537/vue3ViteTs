@@ -315,10 +315,15 @@ VITE_APP_TITLE = My App
 - 创建 utils/request.ts 文件用于封装axios
 - 创建 types/request.ts 文件用于定义axios封装里面的type
 
+#### 封装API请求
+- src/api/auth.ts
+- src/types/auth.ts 根据接口返回，定义TS接口类型
+- src/api/post.ts
+- src/types/post.ts 根据接口返回，定义TS接口类型
+- src/api/index.ts 统一暴露出去给业务方使用，以便统一管理
+
 #### 全局状态管理 Pinia
 
 #### 路由配置
-
-#### 封装API请求
 
 #### 业务代码

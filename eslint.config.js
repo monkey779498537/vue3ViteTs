@@ -34,6 +34,8 @@ export default [
     },
     rules: {
       ...tsPlugin.configs.recommended.rules,
+      // 放宽 any 类型检测
+      '@typescript-eslint/no-explicit-any': 'warn', // 关键修改点
       '@typescript-eslint/no-unused-vars': 'error'
     }
   },

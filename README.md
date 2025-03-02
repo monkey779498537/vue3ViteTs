@@ -366,5 +366,17 @@ VITE_APP_TITLE = My App
   </transition>
 </router-view>
 ```
+- TypeScript 找不到 .vue 文件的类型声明 处理
+    - 原因
+        - 导入Vue单文件组件（.vue文件）时，需要告诉TypeScript如何处理这些文件，因为TypeScript默认不会识别.vue文件的类型
+        - Vue项目通常使用shims-vue.d.ts文件来声明这些模块类型，确保TypeScript能够正确识别它们。
+```js
+// src/shims-vue.d.ts
+declare module '*.vue' {
+    import type { DefineComponent } from 'vue'
+    const component: DefineComponent<Record<string, never>, Record<string, never>, unknown>
+    export default component
+}
+```
 
 #### 业务代码

@@ -10,7 +10,7 @@ import router from './router'
 const pinia = createPinia()
 
 createApp(App) // 创建vue实例
-  .use(ElementPlus)
-  .use(pinia)
-  .use(router)
-  .mount('#app') // 渲染到根节点
+    .use(ElementPlus)
+    .use(pinia)
+    .use(router)
+    .mount('#app') // 渲染到根节点

@@ -6,7 +6,8 @@ import { ref } from 'vue'
 // const  testFunc = ()=>{  // 箭头函数空格问题
 // console.log('hello')      // 缩进问题
 // }
-
+// 在任意组件中测试
+// console.log('当前环境变量:', import.meta.env)
 defineProps<{ msg: string }>()
 
 const count = ref(0)

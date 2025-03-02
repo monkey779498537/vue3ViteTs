@@ -240,3 +240,34 @@ export default defineConfig({
     }
 })
 ```
+
+#### 环境量配置
+- 根目录下创建以下文件
+    - .env             # 所有情况下都会加载，通常用于存储默认值或者跨环境的共享变量，可选配置
+    - .env.local       # 所有情况下都会加载，但会被 git 忽略
+    - .env.development # 开发环境
+    - .env.production  # 生产环境
+- 注意事项：
+    1. 只有以 VITE_ 开头的变量才会被暴露给客户端
+    2. 敏感信息（如数据库密码）不应该放在前端环境变量中
+    3. 环境变量在构建时会被替换，修改环境变量需要重新构建
+    4. 可以使用 .env.local 文件来覆盖默认配置（该文件会被 git 忽略）
+```js
+// .env 可选
+VITE_APP_NAME = MyAwesomeApp
+VITE_COMPANY_LOGO_URL = /logo.png
+
+// .env.local 可选
+VITE_API_KEY = your_secret_key_here
+
+// .env.development
+VITE_API_BASE_URL = http://localhost:3000/api
+VITE_APP_TITLE = My App (Dev)
+
+// .env.production
+VITE_API_BASE_URL = https://api.example.com
+VITE_APP_TITLE = My App
+```
+
+
+```

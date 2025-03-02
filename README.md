@@ -323,6 +323,7 @@ VITE_APP_TITLE = My App
 - src/api/index.ts 统一暴露出去给业务方使用，以便统一管理
 
 #### 全局状态管理 Pinia
+- 新增 src/stores/user.ts 作为全局状态管理用户登陆token信息
 
 #### 路由配置
 

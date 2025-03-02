@@ -7,7 +7,7 @@ const routes: RouteRecordRaw[] = [
     component: () => import('@/views/PostListView.vue'),
     meta: {
       requiresAuth: true,
-      roles: ['admin'],
+      // roles: ['admin']
     }
   }
 ]

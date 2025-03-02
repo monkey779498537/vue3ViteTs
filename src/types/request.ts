@@ -10,6 +10,7 @@ export interface CustomLoadingOptions extends LoadingOptions {
 
 // 定义响应数据结构泛型
 export interface ResponseData<T = any> {
+  status: number
   code: number
   data: T
   message: string

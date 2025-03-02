@@ -1,9 +1,8 @@
-import type { AxiosInstance, AxiosResponse, InternalAxiosRequestConfig } from 'axios'
+import type { AxiosInstance, InternalAxiosRequestConfig } from 'axios'
 import axios from 'axios'
 import { ElLoading } from 'element-plus'
 import type {
   CustomLoadingOptions,
-  ResponseData,
   RequestConfig,
   RequestConfigWithLoading
 } from '@/types/request'
@@ -55,31 +54,32 @@ class Request {
 
     // 响应拦截器
     this.instance.interceptors.response.use(
-      <T>(response: AxiosResponse<ResponseData<T>>) => {
+      response => {
         const config = response.config as RequestConfigWithLoading
 
         // 关闭 loading
         if (config.showLoading) {
           config._loading?.close()
         }
+        
+        console.log('test response', response)
+        const { status } = response
 
-        const res = response.data
-
-        if (res.code === 200) {
-          return res.data
+        if (status === 200) {
+          return response.data
         } else {
-          this.handleError(res.code, res.message)
-          return Promise.reject(res)
+          this.handleError(status, '')
+          return Promise.reject(response)
         }
       },
       error => {
         const config = error.config as RequestConfigWithLoading | undefined
-
+        
         // 关闭 loading
         if (config?.showLoading) {
           config._loading?.close()
         }
-
+        
         this.handleHttpError(error)
         return Promise.reject(error)
       }
@@ -111,7 +111,7 @@ class Request {
       const status = error.response.status
       switch (status) {
         case 400:
-          error.message = '请求参数错误'
+          error.message = error.response.data?.error || '请求参数错误'
           break
         case 404:
           error.message = '请求资源不存在'

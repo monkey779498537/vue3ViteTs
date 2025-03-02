@@ -59,7 +59,7 @@ export default [
           semi: false,
           singleQuote: true,
           trailingComma: 'none',
-          tabWidth: 2,
+          tabWidth: 4,
           printWidth: 100,
           bracketSpacing: true,
           arrowParens: 'avoid',
